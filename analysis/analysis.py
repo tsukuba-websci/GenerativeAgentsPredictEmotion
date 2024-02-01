@@ -127,7 +127,7 @@ def convert_default_data(default_json):
 
 
 def convert_proposal_data(testing_json, mode):
-    df = pd.read_csv("data/source/emotion_bench/text/processed/situations.csv", delimiter="|")
+    df = pd.read_csv("data/processed/situations.csv", delimiter="|")
     factors = df[["ID", "Factor"]]
 
     testing = json.load(open(testing_json))

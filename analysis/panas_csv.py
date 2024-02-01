@@ -91,6 +91,8 @@ if __name__ == "__main__":
     )
     norm = parser.parse_args().norm
 
+    os.makedirs("results", exist_ok=True)
+
     if norm == "norm":
         experiment_id_suffix = ""
         positive_output_file = "results/positive_scores.csv"
@@ -113,7 +115,7 @@ if __name__ == "__main__":
             writer = csv.writer(f)
             writer.writerow(["situation_id", "1", "2", "3", "4", "5"])
 
-    df = pd.read_csv("data/source/emotion_bench/text/processed/situations.csv", delimiter="|")
+    df = pd.read_csv("data/processed/situations.csv", delimiter="|")
 
     for situation_id, factor in tqdm(zip(df["ID"], df["Factor"])):
         positive_scores = [0 for _ in range(scene_len)]

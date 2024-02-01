@@ -19,7 +19,7 @@ if __name__ == "__main__":
     relevance_weight = 1.0
     date = datetime.datetime.now().strftime("%Y-%m-%d")
 
-    df = pd.read_csv("data/source/emotion_bench/text/processed/situations.csv", delimiter="|")
+    df = pd.read_csv("data/processed/situations.csv", delimiter="|")
 
     # Run with a limited number of situations
     # df = df.head(3)

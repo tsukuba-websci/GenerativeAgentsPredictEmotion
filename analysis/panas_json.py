@@ -63,7 +63,7 @@ if __name__ == "__main__":
     NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
     neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 
-    df = pd.read_csv("data/source/emotion_bench/text/processed/situations.csv", delimiter="|")
+    df = pd.read_csv("data/processed/situations.csv", delimiter="|")
 
     num = 10
 

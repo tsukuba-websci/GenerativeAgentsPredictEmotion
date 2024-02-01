@@ -37,7 +37,7 @@ def extract_scores(df, id):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("data/source/emotion_bench/text/processed/situations.csv", delimiter="|")
+    df = pd.read_csv("data/processed/situations.csv", delimiter="|")
 
     positive = pd.read_csv("results/positive_scores.csv")
     negative = pd.read_csv("results/negative_scores.csv")
