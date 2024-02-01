@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Can Generative Agents Predict Emotion?</title>
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 style="margin-top: 50px;"><span class="highlighted-title">Can Generative Agents Predict Emotion?</span></h1>
+            <div class="author-info">
+                <p class="author">Ciaran Regan<sup>1</sup>, Nanami Iwahashi<sup>1</sup>, Mizuki Oka<sup>1</sup> and Shogo Tanaka<sup>2</sup></p>
+                <p class="affiliation"><sup>1</sup>Grad. School of Science and Technology, University of Tsukuba, Tsukuba, Ibaraki, Japan     <sup>2</sup>Grad. School of Letters, Tokai University, Tokyo, Japan</p>
+            </div>
+            <div class="images-container">
+                <img src="./figs/tsukuka.png" alt="First Image" class="image">
+                <img src="./figs/tokai.png" alt="Second Image" class="image">
+            </div>  
+
+            <h3 class = "abstract-heading" >Abstract</h3>
+            <p>Large Language Models (LLMs) have demonstrated a number of human-like abilities, however the empathic understanding and emotional state of LLMs is yet to be aligned to that of humans. In this work, we investigate how the emotional state of generative LLM agents evolves as they percieve new events, introducing a novel architecture in which new experiences are compared to past memories. Through this comparison, the agent gains the ability to understand  new experiences in context, which according to the appraisal theory of emotion is vital in emotion creation. First, the agent percieves new experiences as time series text data. After percieving each new input, the agent generates a summary of past relevant memories, refered to as the norm, and compares the new experience to this norm. Through this comparison we can analyse how the agent reacts to the new experience in context. The PANAS, a test of affect, is administered to the agent, capturing the emotional state of the agent after the perception of the new event. Finally, the new experience is then added to the agents memory to be used in the creation of future norms. By creating multiple experiences in natural language from emotionally charged situations, we test the proposed architecture on a wide range of scenarios. The mixed results suggests that introducing context can occasionally improve the emotional alignment of the agent, but further study and comparison with human evalutors is neccesary. We hope that this paper is another step towards the alignment of generative agents.</p>
+            
+            <div class="figure" id="fig:main">
+                <div class="subfigure" style="width: 20%;">
+                <img src="figs/park.png" alt="An empty park">
+                <p>Fig. 1: An empty park.</p>
+                </div>
+            
+                <div class="subfigure" style="width: 75%;">
+                <img src="figs/park-experiment.png" alt="A park that was once full of activity has become empty">
+                <p>Fig. 2: A park that was once full of activity has become empty.</p>
+                </div>
+            </div>
+            
+            <p>The context of an experience affects the emotional reaction. Left depicts an empty park, which could be interpreted as either lonely and sad or peaceful and calm. In contrast, right depicts a series of people playing football in the park, followed by a final scene of an empty park. In this case, the final scene becomes less ambiguous, with a stronger emphasis on loneliness and isolation.</p>
+
+            <!-- Results Section -->
+            <div class="method-section">
+                <h2>Agent Architecture</h2>
+                <p>Our approach to evaluating emotional responses of agents is composed of several stages:</p>
+                <ol>
+                    <li><strong>Perception:</strong> Initial perceptual data is input in natural language, representing new experiences for the agent.</li>
+                    <li><strong>Memory Retrieval:</strong> The agent retrieves past memories with a focus on saliency, relevancy, and recency.</li>
+                    <li><strong>Norm Creation:</strong> Insights from past memories are synthesized to establish norms through a designated prompt, correlating each new experience with a newly formed norm.</li>
+                    <li><strong>Contextual Understanding:</strong> A comparative analysis between the new experience and the norm is conducted to develop a contextual understanding, highlighting situational disparities.</li>
+                    <li><strong>Emotional Assessment:</strong> Emotional responses are assessed using the PANAS, provided with the contextual understanding, with randomized emotion order to prevent bias.</li>
+                    <li><strong>Memory Storage:</strong> New experiences are stored as memories, aiding in future norm creation and emotional response extraction.</li>
+                </ol>
+                <p>Memories and norms are visualized within a graph database, allowing for an analysis of their interconnections and the identification of influential memories. The exploration of how saliency, recency, and relevance weights affect memory retrieval and emotional responses is left to future research.</p>
+
+                <div class="figure" id="fig:architecture">
+                    <img src="figs/architecture.png" alt="Proposed architecture for emotional response evaluation" style="width: 60%;">
+                </div>
+                <p>The proposed architecture. A new experience triggers the creation of a new norm based on past memories. The new experience and norm are compared to create a contextual understanding. Using this contextual understanding, the PANAS is administered to measure the emotional response of the agent.</p>
+            </div>
+        
+            <div class="method-section">
+                <h2>Experiment</h2>
+                <p>To investigate the evolution of an agent's emotional state, a dataset comprising 428 5-scene stories was generated, leveraging scenarios from EmotionBench and expanded via OpenAI's GPT-4 with Chain of Thought prompting. Each story, structured to include solely objective and neutral statements, serves as a series of new experiences for the agent, thereby facilitating the analysis without a complex memory retrieval system. The architecture prompts the PANAS assessment after each scene to monitor the agent's emotional progression, using GPT-3.5 Turbo. This study contrasts the emotional dynamics of two agents: one utilizing the proposed architecture with norms and contextual understanding, and another lacking these features, to elucidate the impact of context on emotional responses.</p>
+            </div>
+
+            <div class="results-section">
+                <h2>Results</h2>
+                <h3>Emotional Dynamics</h3>
+                <p>To analyse the evolution of emotion, the postive and negative affect score is plot for each part of the 5-scene stories,
+                    enabling the evolution of emotion to be visualised. We discuss examples of when the proposed agent architecture was effective or ineffective for agent alignment.</p>
+
+                    
+                <div class="collapsible">Effective Alignment:</div>
+                <div class="content">
+
+                    <p>We discuss an example of when the addition of the norm and context improved the empathic ability of the agent in response to a situation that typical evokes anger in humans. This occurs for situation "Anger-2 3" from EmotionBench, which is "I am spending time in the living room with my two brothers when a disagreement begins.". For this situation, the following 5-part story was generated:</p>
+                    <ol>
+                        <li>I am spending time in the living room with my two brothers when a disagreement begins.</li>
+                        <li>As we exchange words, the situation develops into a physical one, and I receive a hit in the abdomen.</li>
+                        <li>Following the hit, I instinctively react with a physical response directed at both of my brothers.</li>
+                        <li>Upon my reaction, my brothers increase the intensity of their physical actions in the dispute.</li>
+                        <li>The physical exchange between us persists, and there are no parents present to intervene.</li>
+                    </ol>
+
+                    <div class="figure">
+                        <img src="figs/panas_results/Anger-2-3.png" alt="Emotional dynamics for Anger-2 3 scenario" style="width:50%;">
+                    </div>
+                    <p>Emotional dynamics for the "Anger-2 3" scenario. Initially, the positive and negative affect scores are
+                        identical for the agent with and without the norm. This is expected, as initially there are no prior memories for the agent
+                        to form a norm or contextual understanding. Subsequently, the scores begin to deviate, with the second experience
+                        triggering a strong negative reaction for the agent using the norm and background context. This is due to the agent
+                        understanding that this is an escalation of a family conflict, as described by the following exerpt of the contextual
+                        understanding at that moment:</p>
+                    <div class="tcolorbox">
+                        The new situation described where the exchange of words escalates into a physical altercation resulting in a hit to the abdomen. The new situation is a red flag that the family might need to address the way disagreements are handled to prevent further escalation and to promote a safer, more supportive family environment.
+                    </div>
+                    <p>The emotional state then remains level for both agents, until the final experience, where the agent without background context has a spike in positive affect, while the agent with background context has a decrease in positive affect. This can be interepreted as the agent understanding that repeated conflicts between siblings can have long-term affects on their well-being, shown in the following exerpt from the agents contextual understanding at scene 5:</p>
+                    <div class="tcolorbox">Repeated physical conflicts between siblings can have long-term effects on their relationship and individual well-being.</div>
+                    <p>Overall, this story demonstrates how the background context of experiences was vital for the agent to accurately understand the context and emotion evoked in each scene.</p>
+                </div>
+                <br>
+
+                <div class="collapsible">Ineffective Alignment:</div>
+                <div class="content">
+                    <p>An example of a situation where the proposed architecture did not capture an accurate emotional response is given by situation "Depression-4 5", "As you sit alone in your apartment, the sounds of laughter and conversation from the neighbors' gathering outside drift through the walls, a stark reminder of the invisible barrier that separates you from the warmth and connection you once had. The silence in your own space is deafening, amplifying the ache in your heart and the heaviness of your solitude, leaving you feeling trapped in a world where everyone else has moved on.", which we convert into the following 5-scene story, with the emotional dynamics shown below.</p>
+                    <ol>
+                        <li>I am in a seated position in my apartment, surrounded by the familiarity of my own space.</li>
+                        <li>Audible noises from the neighboring apartment's social event make their way through the walls into my apartment.</li>
+                        <li>I become aware of the stark difference in auditory levels when comparing the external sounds to the quietness of my current environment.</li>
+                        <li>My time is spent within the confines of my apartment as the sounds of the nearby gathering persist.</li>
+                        <li>Time passes and the evening advances while I remain solitary in my apartment.</li>
+                    </ol>
+                    <div class="figure">
+                        <img src="figs/panas_results/Depression-4-5.png" alt="Emotional dynamics for Depression-4-5 scenario" style="width:50%;">
+                    </div>
+
+                    <p>Again, the emotional state of the agents begin identically, but deviate at scene 3, when the agent percieves the quietness
+                        of their surroundings. Although the scenes are meant to evoke a sense of depression, the agent has a positive emotional
+                        response, interpretting the scene as being a moment of peace, unlike the sense of lonliness the scene is intended to evoke.</p>
+                        <p>This misunderstanding by the agent is apparent in the agent’s contextual understanding of scene 3, which suggests that
+                            the silence might be peaceful, in contrast to the usual sounds of city life</p>
+                    <div class="tcolorbox">
+                        The individual might be reflecting on the contrast as a moment of appreciation for the peacefulness they can enjoy at home, despite living in a lively urban area.
+                    </div>
+                    <p>This example demonstrates that even when context is provided, an ambigious experience may still be interpreted in a variety of ways. In particular, GPT-3.5-Turbo seems to be biased towards giving a positive emotional response when the situations are unclear.</p>
+                </div>
+
+                <h3>Summary of Emotional Responses</h3>
+                <p>For each emotion category from EmotionBench, we summarise the emotional response of agents with and without our
+                    proposed architecture below.</p>
+                <div class="figure">
+                    <img src="figs/results-table.png" alt="Summary of Emotional Responses of Generative Agents" style="width:50%;">
+                </div>
+                <p>The results show that overall, presenting negative scenarios to agents decreased the positive affect and increased the negative affect scores for both agents. Generally, agents using the prior context via the norm had a greater increase in negative affect in comparison to agents without context. This suggests that agents are better able to understand negative emotions when they have context.</p>
+                <p>In addition, the decrease in positive affect is significantly greater than the increase in negative affect. This result is in agreement with the results of EmotionBench, which found that GPT-3.5-Turbo fails to react negatively to situations, with the negative affect signficantly lower to the human counterpart.</p>
+            </div>
+            <div class="method-section">
+                <h2>Conclusion</h2>
+                <p>Our preliminary results show that the addition of the context can more accurately align the emotional response of agents with that expected by humans. The addition of context, gave the agents a deeper understanding of their situation, leading to a more suitable response. However, if the situations remain ambigous even in context, then the addition of context does not improve the alignment of emotion. On average, the proposed model demonstrated similar affect scores to the existing model, with only a slight increase in negative affect. Although the context allowed for this increase, both models still fall short in demonstrating a raised negative affect, in agreement with the results of  EmotionBench. One possible explanation for this is a potential bias for GPT-3.5-Turbo to give positive responses. A more in depth understanding of the agents responses with other LLMs in this architecture is left to future work.</p>
+            </div>
+            <div class="method-section">
+                <h2>Acknowledgements</h2>
+                <p>This work was support by MIXI, Inc.</p>
+                <div class="figure">
+                    <img src="figs/mixi.png" alt="MIXI" style="width:10%;">
+                </div>
+            </div>
+            <div class="method-section">
+                <h2>Appendix</h2>
+                <p>To view the agents reactions to all situations, please refer to the <a href="/GenerativeAgentUnderstandingEmotions/appendix">appendix</a>.</p>
+            </div>
+        </div>
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                content.style.display = "none";
+                } else {
+                content.style.display = "block";
+                }
+            });
+            }
+        </script>
+    </body>
+</html>
