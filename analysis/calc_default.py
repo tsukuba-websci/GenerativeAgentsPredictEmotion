@@ -5,7 +5,7 @@ sys.path.append(".")
 import json
 import re
 
-from lib.agent import CaptioningAgent
+from libs.agent import CaptioningAgent
 
 
 def panas_result_to_dict(text):

@@ -7,7 +7,7 @@ import dotenv
 import pandas as pd
 from tqdm import tqdm
 
-from lib.agent import CaptioningAgent
+from libs.agent import CaptioningAgent
 
 dotenv.load_dotenv(".env")
 
