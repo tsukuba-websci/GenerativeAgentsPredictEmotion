@@ -122,15 +122,22 @@
                 <h3>Summary of Emotional Responses</h3>
                 <p>For each emotion category from EmotionBench, we summarise the emotional response of agents with and without our
                     proposed architecture below.</p>
-                    <div class="figure">
-                        <img src="figs/results-table.png" alt="Summary of Emotional Responses of Generative Agents" style="width:50%;">
-                    </div>
+                <div class="figure">
+                    <img src="figs/results-table.png" alt="Summary of Emotional Responses of Generative Agents" style="width:50%;">
+                </div>
                 <p>The results show that overall, presenting negative scenarios to agents decreased the positive affect and increased the negative affect scores for both agents. Generally, agents using the prior context via the norm had a greater increase in negative affect in comparison to agents without context. This suggests that agents are better able to understand negative emotions when they have context.</p>
                 <p>In addition, the decrease in positive affect is significantly greater than the increase in negative affect. This result is in agreement with the results of EmotionBench, which found that GPT-3.5-Turbo fails to react negatively to situations, with the negative affect signficantly lower to the human counterpart.</p>
             </div>
             <div class="method-section">
                 <h2>Conclusion</h2>
                 <p>Our preliminary results show that the addition of the context can more accurately align the emotional response of agents with that expected by humans. The addition of context, gave the agents a deeper understanding of their situation, leading to a more suitable response. However, if the situations remain ambigous even in context, then the addition of context does not improve the alignment of emotion. On average, the proposed model demonstrated similar affect scores to the existing model, with only a slight increase in negative affect. Although the context allowed for this increase, both models still fall short in demonstrating a raised negative affect, in agreement with the results of  EmotionBench. One possible explanation for this is a potential bias for GPT-3.5-Turbo to give positive responses. A more in depth understanding of the agents responses with other LLMs in this architecture is left to future work.</p>
+            </div>
+            <div class="method-section">
+                <h2>Acknowledgements</h2>
+                <p>This work was support by MIXI, Inc.</p>
+                <div class="figure">
+                    <img src="figs/mixi.png" alt="MIXI" style="width:10%;">
+                </div>
             </div>
         </div>
         <script>
