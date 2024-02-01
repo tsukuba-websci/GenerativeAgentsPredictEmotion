@@ -33,6 +33,8 @@ def create_html_with_images_and_memories(csv_path, image_folder_path, output_htm
         image_filename = id_to_image.get(index)
         image_src = f"{image_folder_path}/{image_filename}"
         filename_without_extension, _ = os.path.splitext(image_filename)
+        filename_without_extension = filename_without_extension.rsplit('-', 1)
+        filename_without_extension = ' '.join(filename_without_extension)
         html_content.append(f'            <h3>{filename_without_extension}</h3>')
         html_content.append(f'            <h4>{row["Situation"]}</h4>')
         html_content.append(f'            <div class="figure">')
