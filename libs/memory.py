@@ -7,10 +7,8 @@ from langchain.prompts import PromptTemplate
 from langchain.schema.language_model import BaseLanguageModel
 from langchain.embeddings.openai import OpenAIEmbeddings
 from neo4j import GraphDatabase, Driver
-from sklearn.metrics.pairwise import cosine_similarity
 from pydantic import BaseModel, Field
 from typing import Any
-import numpy as np
 
 
 def neo4j_date_to_datetime(dt: Any) -> datetime:
@@ -296,113 +294,6 @@ class CaptioningAgentMemory(BaseModel):
             session.run(query, parameters=parameters)
         pass
 
-    def similarity_search(self, memory_embedding: any) -> List[int]:
-        """
-        Search for similar memories in the Neo4j graph database based on the memory embedding of a given memory node.
-
-        Args:
-            memory_embedding (int): The ID of the memory node to search for similar memories.
-
-        Returns:
-            List[int]: A list of IDs of memory nodes that are similar to the given memory node.
-        """
-
-        query = """
-            CALL db.index.vector.queryNodes('memory_embeddings', $memories_to_reinforce, $memory_embedding)
-            YIELD node AS similarMemory, score
-
-            MATCH (similarMemory)
-            WHERE score < 1
-            RETURN id(similarMemory) AS node_id
-        """
-        with self.neo4j_driver.session() as session:
-            results = session.run(
-                query,
-                parameters={"memory_embedding": memory_embedding, "memories_to_reinforce": self.memories_to_reinforce},
-            ).data()
-        node_ids = [item["node_id"] for item in results]
-        return node_ids
-
-    def reinforce_memory(self, node_id: int) -> None:
-        """
-        Update the counter property of a memory node in the Neo4j graph database.
-
-        Args:
-            node_id (int): The ID of the memory node to update.
-
-        Returns:
-            None
-        """
-
-        query = """
-            MATCH (memory:Memory)
-            WHERE id(memory) = $node_id
-            SET memory.counter = memory.counter + $rho
-        """
-        with self.neo4j_driver.session() as session:
-            session.run(query, parameters={"node_id": node_id, "rho": self.rho})
-        pass
-
-    def find_top_memories(self, memory_embedding: str) -> str:
-        """
-        Find the memories with the highest combined score.
-
-        Args:
-            memory_caption (str): The content of the new memory.
-
-        Returns:
-            str: The time and content of the top memories, concatenated.
-        """
-
-        query = """
-            MATCH (memory:Memory)
-            WHERE memory.experiment_id = $experiment_id
-            RETURN id(memory) AS node_id, memory.saliency_score as saliency_score, memory.date AS date, memory.memory_embedding AS memory_embedding, memory.counter AS counter, memory.memory AS memory
-        """
-        with self.neo4j_driver.session() as session:
-            results = session.run(query, parameters={"experiment_id": self.experiment_id}).data()
-
-        # For each memory, calculate the combined score
-        memory_scores = []
-        for memory in results:
-            saliency_score = memory["saliency_score"]  # between 0 and 1
-            reinforcement_score = memory["counter"]  # between 0 and inf
-            recency_score = (1.0 - self.decay_rate) ** _get_days_passed(
-                datetime.now(), neo4j_date_to_datetime(memory["date"])
-            )  # between 0 and 1
-            memory_embedding = np.array(memory_embedding).reshape(1, -1)
-            memory_embedding = np.array(memory["memory_embedding"]).reshape(1, -1)
-            relevance_score = cosine_similarity(memory_embedding, memory_embedding)  # between -1 and 1
-
-            combined_score = (
-                self.saliency_weight * saliency_score
-                + self.reinforcement_weight * reinforcement_score
-                + self.recency_weight * recency_score
-                + self.relevance_weight * relevance_score
-            )
-
-            memory_scores.append((memory["memory"], memory["date"], memory["node_id"], combined_score))
-
-        # Sort the memories by their combined score
-        memory_scores.sort(key=lambda x: x[3], reverse=True)
-
-        # Take the top self.memories_in_norm memories
-        top_memories = memory_scores[: self.memories_in_norm]
-
-        result_strings = []
-        norm_memory_ids = []
-        for memory in top_memories:
-            date_str = memory[1].strftime("%d %B %Y")
-            formatted_string = f"[{date_str}]: {memory[0]}"
-            result_strings.append(formatted_string)
-            norm_memory_ids.append(memory[2])
-
-        self.current_norm_ids = norm_memory_ids
-
-        result_string = "\n".join(result_strings)
-
-        return result_string
-
     def find_all_memories(self) -> str:
         """
         Find all memories.
@@ -433,34 +324,6 @@ class CaptioningAgentMemory(BaseModel):
         result_string = "\n".join(result_strings)
 
         return result_string
-
-    def calculate_saliency_score(self, memory: str) -> float:
-        """
-        Calculate the saliency score of a given memory by prompting the user to rate its poignancy on a scale of 1 to 10.
-
-        Args:
-            emotional_understanding (str): The emotional caption of the memory to calculate the saliency score for.
-
-        Returns:
-            float: The saliency score of the memory, as a float between 0 and 1.
-        """
-
-        prompt = PromptTemplate.from_template(
-            "On the scale of 1 to 10, where 1 is purely mundane"
-            + " (e.g., brushing teeth, making bed) and 10 is"
-            + " extremely poignant (e.g., a break up, college"
-            + " acceptance), rate the likely poignancy of the"
-            + " following piece of memory. Respond with a single integer."
-            + "\nMemory: {memory}"
-            + "\nRating: "
-        )
-
-        score = self.chain(prompt).run(memory=memory).strip()
-        match = re.search(r"^\D*(\d+)", score)
-        if match:
-            return float(match.group(1)) / 10
-        else:
-            return 0.0
 
     def add_nodes_and_edges(
         self,

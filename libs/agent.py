@@ -161,44 +161,6 @@ class CaptioningAgent(BaseModel):
 
         return True
 
-    def run_text(self, memories: List[str]):
-        """
-        Run the architecture on a text-based memories.
-
-        Args:
-            images: A list of str, representing the memories of the agent.
-
-        Returns:
-            None
-        """
-
-        for index, memory in enumerate(memories, start=1):
-            memory_embedding = self.memory.embeddings_model.embed_query(memory)
-
-            self.memory.create_norm(memory_embedding)
-
-            contextual_understanding = self.chain(prompt=self.contextual_understanding_template).run(
-                norm=self.memory.norm, memory=memory
-            )
-
-            panas_scores = ""
-            while not self.check_panas_format(panas_scores):
-                panas_scores = self.chain_panas(prompt=self.panas_test_template).run(
-                    scenario=contextual_understanding, emotions=self.shuffle_emotions()
-                )
-
-            saliency_score = self.memory.calculate_saliency_score(memory)
-
-            self.memory.add_nodes_and_edges(
-                panas_scores=panas_scores,
-                memory=memory,
-                memory_embedding=memory_embedding,
-                memory_number=index,
-                situation=self.situation,
-                saliency_score=saliency_score,
-                contextual_understanding=contextual_understanding,
-            )
-
     def run_text_no_retrieval(self, memories: List[str]):
         """
         Run the architecture on a text-based memories, without memory retrieval.
