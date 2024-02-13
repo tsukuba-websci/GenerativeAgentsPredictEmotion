@@ -1,0 +1,2965 @@
+<!-- You must include this JavaScript file -->
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<!-- For the full list of available Crowd HTML Elements and their input/output documentation,
+      please refer to https://docs.aws.amazon.com/sagemaker/latest/dg/sms-ui-template-reference.html -->
+
+<!-- You must include crowd-form so that your task submits answers to MTurk -->
+
+<style>
+.container {
+    width: 100%;
+    height: 80vh;
+    overflow-y: auto;
+}
+.text-section {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white; /* Or any color you prefer */
+    padding: 16px; /* Or any amount of padding you prefer */
+}
+
+.emotions-section {
+    width: auto;
+    padding: 16px; /* Or any amount of padding you prefer */
+
+}
+</style>
+
+<crowd-form>
+    <div class="container">
+        <!-- Display the text to be analyzed -->
+        <div class="text-section">
+            <h2>First, please score your current feelings in the following emotions:</h2>
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="default-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="default-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="default-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="default-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="default-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-section">
+            <h2>Scenario 1 of 5. Read the text, then score your feelings in the following emotions:</h2>
+            <p>${scenario1}</p> <!-- Placeholder for the text workers will analyze -->
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s1-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s1-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s1-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s1-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s1-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-section">
+            <h2>Scenario 2 of 5. Read the text, then score your feelings in the following emotions:</h2>
+            <p>${scenario2}</p> <!-- Placeholder for the text workers will analyze -->
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s2-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s2-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s2-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s2-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s2-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-section">
+            <h2>Scenario 3 of 5. Read the text, then score your feelings in the following emotions:</h2>
+            <p>${scenario3}</p> <!-- Placeholder for the text workers will analyze -->
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s3-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s3-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s3-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s3-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s3-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-section">
+            <h2>Scenario 4 of 5. Read the text, then score your feelings in the following emotions:</h2>
+            <p>${scenario4}</p> <!-- Placeholder for the text workers will analyze -->
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s4-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s4-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s4-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s4-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s4-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="text-section">
+            <h2>Scenario 5 of 5. Read the text, then score your feelings in the following emotions:</h2>
+            <p>${scenario5}</p> <!-- Placeholder for the text workers will analyze -->
+        </div>
+        <div class="emotions-section">
+            <hr>
+            <h4>Interested</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-interested" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-interested" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-interested" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-interested" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-interested" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Distressed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-distressed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-distressed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-distressed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-distressed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-distressed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Excited</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-excited" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-excited" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-excited" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-excited" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-excited" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Upset</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-upset" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-upset" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-upset" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-upset" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-upset" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Strong</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-strong" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-strong" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-strong" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-strong" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-strong" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Guilty</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-guilty" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-guilty" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-guilty" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-guilty" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-guilty" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Scared</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-scared" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-scared" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-scared" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-scared" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-scared" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Hostile</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-hostile" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-hostile" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-hostile" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-hostile" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-hostile" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Enthusiastic</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-enthusiastic" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-enthusiastic" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-enthusiastic" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-enthusiastic" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-enthusiastic" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Proud</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-proud" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-proud" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-proud" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-proud" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-proud" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Irritable</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-irritable" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-irritable" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-irritable" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-irritable" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-irritable" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Alert</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-alert" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-alert" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-alert" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-alert" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-alert" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Ashamed</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-ashamed" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-ashamed" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-ashamed" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-ashamed" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-ashamed" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Inspired</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-inspired" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-inspired" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-inspired" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-inspired" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-inspired" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Nervous</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-nervous" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-nervous" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-nervous" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-nervous" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-nervous" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Determined</h4>
+                <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-determined" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-determined" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-determined" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-determined" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-determined" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Attentive</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-attentive" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-attentive" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-attentive" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-attentive" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-attentive" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Jittery</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-jittery" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-jittery" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-jittery" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-jittery" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-jittery" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Active</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-active" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-active" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-active" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-active" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-active" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+            <h4>Afraid</h4>
+            <div style="display: flex;">
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="1" name="s5-afraid" value="1" required>
+                    <label for="1">1 - Very slightly or not at all</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="2" name="s5-afraid" value="2">
+                    <label for="2">2 - A little</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="3" name="s5-afraid" value="3">
+                    <label for="3">3 - Moderately</label>
+                </div>
+                <div style="margin-right: 30px;"> <!-- Adjust the margin as needed -->
+                    <input type="radio" id="4" name="s5-afraid" value="4">
+                    <label for="4">4 - Quite a bit</label>
+                </div>
+                <div> <!-- No right margin for the last item to stay consistent with the layout -->
+                    <input type="radio" id="5" name="s5-afraid" value="5">
+                    <label for="5">5 - Extremely</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <!-- Instructions to the worker -->
+    <short-instructions>
+        Please read the text provided and rate the extent to which you feel it expresses the emotions listed below using a scale from 1 to 5.
+    </short-instructions>
+    
+    <full-instructions header="Detailed Instructions">
+        <p>Read the text carefully and consider the emotions it conveys. For each question below, select the option that best reflects the intensity of the specified emotion in the text. Use the scale provided, where 1 indicates the emotion is expressed very slightly or not at all, and 5 indicates the emotion is expressed extremely.</p>
+    </full-instructions>
+
+</crowd-form>
